@@ -1,0 +1,86 @@
+import pandas as pd
+
+
+# In[15]:
+
+
+pd.read_table('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/chipotle.tsv')
+
+
+# In[17]:
+
+
+orders = pd.read_table('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/chipotle.tsv')
+
+
+# In[19]:
+
+
+orders.head()
+
+
+# In[26]:
+
+
+user_cols = ['user_id','age','gender','occupation','zip_code']
+users = pd.read_table('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/u.user', sep='|', header=None, names=user_cols)
+
+
+# In[27]:
+
+
+users.head()
+
+
+# In[30]:
+
+
+ufo = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/ufo.csv')
+
+
+# In[32]:
+
+
+type(ufo)
+
+
+# In[34]:
+
+
+ufo.head()
+
+
+# In[43]:
+
+
+ufo['City']
+
+
+# In[45]:
+
+
+type(ufo['City'])
+
+
+# In[47]:
+
+
+ufo['Colors Reported']
+
+
+# In[55]:
+
+
+ufo['Location'] = ufo['City'] + ',' + ufo['State'] 
+
+
+# In[56]:
+
+
+ufo.head()
+
+
+# In[57]:
+
+
+ufo['Location']
