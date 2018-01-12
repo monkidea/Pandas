@@ -1,3 +1,9 @@
+
+# coding: utf-8
+
+# In[14]:
+
+
 import pandas as pd
 
 
@@ -68,19 +74,326 @@ type(ufo['City'])
 ufo['Colors Reported']
 
 
-# In[55]:
-
-
-ufo['Location'] = ufo['City'] + ',' + ufo['State'] 
-
-
 # In[56]:
 
 
 ufo.head()
 
 
+# In[55]:
+
+
+ufo['Location'] = ufo['City'] + ',' + ufo['State'] 
+
+
 # In[57]:
 
 
 ufo['Location']
+
+
+# In[59]:
+
+
+movies = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/imdb_1000.csv')
+
+
+# In[60]:
+
+
+movies.head()
+
+
+# In[64]:
+
+
+movies.describe()
+
+
+# In[68]:
+
+
+movies.shape
+
+
+# In[74]:
+
+
+movies.dtypes
+
+
+# In[75]:
+
+
+movies.describe(include=['object'])
+
+
+# In[77]:
+
+
+ufo.columns
+
+
+# In[86]:
+
+
+#rename COlumns
+ufo.rename(columns={'City':'city', 'Colors Reported':'Colors_Reported'})
+
+
+# In[98]:
+
+
+#rename all the columns simultaneosly
+ufo_cols = ['city','colors reported','shape reported','state','time','location']
+
+
+# In[99]:
+
+
+ufo.columns = ufo_cols
+
+
+# In[100]:
+
+
+ufo.columns
+
+
+# In[101]:
+
+
+ufo.head()
+
+
+# In[102]:
+
+
+#renaming columns at the time of loading file
+ufo = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/ufo.csv', names=ufo_cols, header=0)
+
+
+# In[112]:
+
+
+#replacing all the spaces from the columns
+ufo.columns = ufo.columns.str.replace(' ' , '_')
+
+
+# In[113]:
+
+
+ufo.columns
+
+
+# In[114]:
+
+
+ufo.head()
+
+
+# In[115]:
+
+
+
+ufo = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/ufo.csv')
+
+
+# In[121]:
+
+
+ufo.head()
+
+
+# In[123]:
+
+
+ufo.shape
+
+
+# In[124]:
+
+
+#remove columns from dataframe
+ufo.drop('Colors Reported', axis = 1, inplace=True)
+
+
+# In[125]:
+
+
+ufo.head()
+
+
+# In[127]:
+
+
+#removing 2 columns from the data table
+ufo.drop(['City','State'] , axis = 1, inplace= True)
+
+
+# In[128]:
+
+
+ufo.head()
+
+
+# In[130]:
+
+
+#deleting rows
+ufo.drop([0,1], axis=0,inplace=True)
+
+
+# In[131]:
+
+
+ufo.head()
+
+
+# In[132]:
+
+
+movies = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/imdb_1000.csv')
+
+
+# In[133]:
+
+
+movies.head()
+
+
+# In[135]:
+
+
+movies['title']
+
+
+# In[137]:
+
+
+#sorting the data in descending order
+movies['title'].sort_values(ascending=False)
+
+
+# In[138]:
+
+
+#sorting the values in ascending
+
+movies['title'].sort_values()
+
+
+# In[140]:
+
+
+#sorting a partucular  dataframes columns along with its values
+movies.sort_values('title')
+#for sorting the values in descending order
+movies.sort_values('title',ascending=False)
+
+
+# In[142]:
+
+
+#sorting 2 columns simultaneosly
+movies.sort_values(['title','genre'])
+
+
+# In[143]:
+
+
+movies = pd.read_csv('https://raw.githubusercontent.com/justmarkham/pandas-videos/master/data/imdb_1000.csv')
+
+
+# In[144]:
+
+
+movies.head()
+
+
+# In[146]:
+
+
+
+movies.shape
+
+
+# In[148]:
+
+
+type(False)
+
+
+# In[155]:
+
+
+#filtering rows of the dataset using columns values
+booleans = []
+for length in movies.duration:
+    if length >= 200:
+         booleans.append(True)
+    else:
+            booleans.append(False)
+
+
+# In[156]:
+
+
+booleans[0:5]
+
+
+# In[158]:
+
+
+len(booleans)
+
+
+# In[159]:
+
+
+#convert boolean list to pandas series
+is_long = pd.Series(booleans)
+
+
+# In[160]:
+
+
+is_long.head()
+
+
+# In[161]:
+
+
+#passing series into the dataframes to see the final result
+movies[is_long]
+
+
+# In[162]:
+
+
+#2nd method to filter rows 
+is_long = movies.duration>=200
+is_long.head()
+
+
+# In[163]:
+
+
+#3rd and the best way of filtering values
+
+movies[movies.duration>=200]
+
+
+# In[164]:
+
+
+#filtering values for a specific column
+movies[movies.duration>=200]['genre']
+
+
+# In[165]:
+
+
+#industry use method
+movies.loc[movies.duration>=200,'genre']
+
